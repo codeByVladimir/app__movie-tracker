@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'Caros-bold';
+    src: url('../fonts/Fontspring-DEMO-caros-bold.otf') format('opentype');
+}
+body{
+    background-color: #EBEAEA;
+    font-family: "Roboto", sans-serif;
+}
+.header{
+    margin-block: 40px;
+}
+.container{
+    max-width: 1331px;
+    margin: 0px auto;
+    padding: 0px 15px;
+}
+.header__wrapper{
+    max-width: 955px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header__title{
+    display: inline-block;
+    font-family: "Caros-bold", serif;
+    font-weight: 600;
+    font-size: 35px;
+    line-height: 100%;
+    max-width: 130px;
+}
+.header__search{
+    min-width: 630px;
+    height: 53px;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    background-color: #D9D9D9;
+    padding-left: 185px;
+    font-size: 20px;
+    line-height: 100%;
+}
+
+
+
+.main__content-wrapper{
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+}
+.main__title{
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    margin-bottom: 20px;
+}
