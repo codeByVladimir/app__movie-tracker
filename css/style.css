@@ -53,3 +53,28 @@ body{
     line-height: 100%;
     margin-bottom: 20px;
 }
+.main__title:last-of-type{
+    margin-top: 40px;
+}
+.main__list-movies, .main__list-anime{
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    column-gap: 22px;
+}
+.main__content-item{
+    max-width: 177px;
+    min-height: 263px;
+}
+.main__content-img-wrapper{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.main__content-image{
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
