@@ -126,29 +126,32 @@ body.movie-page .main__description-wrapper{
     min-height: 291px;
     display: flex;
     flex-direction: column;
+    margin-left: 20px;
 }
 body.movie-page .main__role-list{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     column-gap: 20px;
     margin-block: 20px;
 }
 body.movie-page .main__role-item{
-    max-width: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 88px;
     min-height: 33px;
     border-radius: 20px;
-    border: 1px solid #000000;
-    text-align: center;
+    border: 2px solid #000000;
+    font-weight: 500;
 }
 body.movie-page .main__description{
     font-size: 18px;
-    line-height: 100%;
+    line-height: 120%;
     font-weight: 500;
     max-width: 413px;
-    margin-bottom: 50px;
 }
 body.movie-page .main__rating{
     font-size: 18px;
     line-height: 100%;
+    margin-top: 50px;
 }

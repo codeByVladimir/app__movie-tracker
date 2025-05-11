@@ -41,7 +41,7 @@ async function parseInfo(url, movies){
 function htmlCreateElement(object, listNode){
     for (const element of object) {
         listNode.innerHTML += `
-        <li class="main__content-item" data-id="${element.Title}">
+        <li class="main__content-item" data-id="${element.imdbID}">
             <div class="main__content-img-wrapper">
                 <img class="main__content-image" src="${element.Poster}" alt="${element.Title}">
             </div>
