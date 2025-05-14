@@ -83,11 +83,9 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    margin-block: 50px;
+    margin-top: 50px;
 }
 .footer__developer{
-    width: 100%;
     color: #000000;
     text-decoration: underline;
     text-underline-offset: 5px;
@@ -107,8 +105,12 @@ body.movie-page .main__title{
 }
 body.movie-page .main__content-wrapper{
     display: flex;
+    justify-content: space-between;
     max-width: 1279px;
     min-height: 291px;
+}
+body.movie-page .flex-container{
+    display: flex;
 }
 body.movie-page .main__poster-wrapper{
     max-width: 196px;
@@ -154,4 +156,10 @@ body.movie-page .main__rating{
     font-size: 18px;
     line-height: 100%;
     margin-top: 50px;
+}
+body.movie-page .main__video-trailer{
+    max-width: 521px;
+    min-height: 291px;
+    overflow: hidden;
+    border-radius: 20px;
 }
