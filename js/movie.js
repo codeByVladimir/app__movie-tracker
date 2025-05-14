@@ -5,7 +5,7 @@ const descriptionNode = document.querySelector('.main__description');
 const ratingNode = document.querySelector('.main__rating');
 const trailerNode = document.querySelector('.main__video-trailer');
 
-const URL = 'http://www.omdbapi.com/?apikey=be7190c1&i=';
+const URL = 'https://www.omdbapi.com/?apikey=be7190c1&i=';
 const API_KEY = 'AIzaSyAx8Tg_iKsb_NUSsz_D8ACtz6Pq4OstJJE';
 
 async function getInfo(){

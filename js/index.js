@@ -1,7 +1,7 @@
 const movieslistNode = document.querySelector('.main__list-movies');
 const animelistNode = document.querySelector('.main__list-anime');
 
-const URL = 'http://www.omdbapi.com/?apikey=be7190c1&t=';
+const URL = 'https://www.omdbapi.com/?apikey=be7190c1&t=';
 
 const popularMovies = [
     'Joker', 
