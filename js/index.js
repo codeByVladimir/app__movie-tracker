@@ -49,20 +49,28 @@ function htmlCreateElement(object, listNode){
     }
 }
 
+
+
 movieslistNode.addEventListener('click', (event) => {
     const getDataId = event.target.closest('.main__content-item');
-    let dataId = '';
-    if(getDataId){
-        dataId = getDataId.dataset.id;
-    }
+    if(!getDataId) return;
+    const dataId = getDataId.dataset.id;
     window.location.href = `movie.html?id=${dataId}`;
 })
+animelistNode.addEventListener('click', (event) => {
+    const getDataId = event.target.closest('.main__content-item');
+    if(!getDataId) return;
+    const dataId = getDataId.dataset.id;
+    window.location.href = `movie.html?id=${dataId}`;
+})
+
+
 
 async function start(){
     const movies = await parseInfo(URL, popularMovies);
     const anime = await parseInfo(URL, popularAnime)
-    htmlCreateElement(movies, movieslistNode);
-    htmlCreateElement(anime, animelistNode)
+    await htmlCreateElement(movies, movieslistNode);
+    await htmlCreateElement(anime, animelistNode)
 }
 
 start();

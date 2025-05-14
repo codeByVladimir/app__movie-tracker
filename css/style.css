@@ -83,7 +83,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-block: 50px;
 }
 .footer__developer{
     color: #000000;
@@ -94,9 +94,15 @@ body{
 
 
 
-
+body.movie-page .footer{
+    margin-top: 100px;
+}
 /* movie.html */
 
+body.movie-page .header__title-link{
+    text-decoration: none;
+    color: inherit;
+}
 body.movie-page .main__title{
     font-size: 40px;
     line-height: 100%;
