@@ -83,7 +83,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-block: 50px;
+    margin-top: 90px;
+    margin-bottom: 10px;
 }
 .footer__developer{
     color: #000000;
@@ -94,9 +95,6 @@ body{
 
 
 
-body.movie-page .footer{
-    margin-top: 100px;
-}
 /* movie.html */
 
 body.movie-page .header__title-link{
@@ -126,7 +124,7 @@ body.movie-page .main__poster-wrapper{
 }
 body.movie-page .main__poster{
     width: 100%;
-    height: 100;
+    height: 100%;
     object-fit: cover;
 }
 body.movie-page .main__description-wrapper{

@@ -1,5 +1,6 @@
 const movieslistNode = document.querySelector('.main__list-movies');
 const animelistNode = document.querySelector('.main__list-anime');
+const searchNode = document.querySelector('.header__search');
 
 const URL = 'https://www.omdbapi.com/?apikey=be7190c1&t=';
 
@@ -21,7 +22,22 @@ const popularAnime = [
     'hunter x hunter'
 ];
 
+function debounce(fn, ms){
+    let timer; // сохраняем id таймера
+    return function(...args){ // в обертку rest сохраняет параметры браузера
+        clearTimeout(timer); 
+        timer = setTimeout(() => {
+            fn(...args);
+        }, ms)
+    }
+}
 
+async function getSearchTitle(event){
+    console.log(searchNode.value)
+}
+
+const searchTitle = debounce(getSearchTitle, 600);
+searchNode.addEventListener('input', searchTitle);
 
 async function parseInfo(url, movies){
     try{
