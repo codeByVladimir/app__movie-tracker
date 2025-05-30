@@ -1,6 +1,7 @@
 const movieslistNode = document.querySelector('.main__list-movies');
 const animelistNode = document.querySelector('.main__list-anime');
 const searchNode = document.querySelector('.header__search');
+const titleSearchNode = document.querySelector('.header__popup')
 
 const URL = 'https://www.omdbapi.com/?apikey=be7190c1&t=';
 
@@ -33,11 +34,30 @@ function debounce(fn, ms){
 }
 
 async function getSearchTitle(event){
-    console.log(searchNode.value)
+    try{
+        const request = await fetch(`${URL}${encodeURIComponent(event.target.value)}`);
+        const response = await request.json();
+        console.log(response);
+        titleSearchNode.innerHTML = `
+            <div class="header__popup-content">
+                <div class="header__popup-image-wrapper">
+                    <img class="header__popup-image" src="${response.Poster}" alt="${response.Title}">
+                </div>
+                <div class="header__popup-about">
+                    <h3 class="header__popup-title">${response.Title}</h3>
+                    <p class="header__popup-subtitle">${response.Year} ${response.Genre}</p>
+                    <p class="header__popup-about-title">${response.Plot}</p>
+                </div>
+            </div>
+        `
+    }catch(error){
+        console.log(`Ошибка парсинга: ${error}`);
+    }
 }
 
 const searchTitle = debounce(getSearchTitle, 600);
 searchNode.addEventListener('input', searchTitle);
+
 
 async function parseInfo(url, movies){
     try{
