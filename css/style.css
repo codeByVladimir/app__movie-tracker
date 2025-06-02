@@ -41,6 +41,13 @@ body{
     z-index: 2;
 }
 
+.no-scroll{
+    overflow: hidden;
+}
+.header__popup-status-error{
+    margin: auto auto;
+    font-size: 24px;
+}
 
 .header__popup{
     display: block;
@@ -51,9 +58,6 @@ body{
     left: 0px;
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 1;
-}
-.no-scroll{
-    overflow: hidden;
 }
 .header__popup-content{
     display: flex;
