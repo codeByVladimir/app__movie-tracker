@@ -4,9 +4,71 @@ const listNode = document.querySelector('.main__role-list');
 const descriptionNode = document.querySelector('.main__description');
 const ratingNode = document.querySelector('.main__rating');
 const trailerNode = document.querySelector('.main__video-trailer');
+const searchNode = document.querySelector('.header__search');
+const titleSearchNode = document.querySelector('.header__popup')
 
 const URL = 'https://www.omdbapi.com/?apikey=be7190c1&i=';
+const searchURL = 'https://www.omdbapi.com/?apikey=be7190c1&t=';
 const API_KEY = 'AIzaSyAx8Tg_iKsb_NUSsz_D8ACtz6Pq4OstJJE';
+
+
+function debounce(fn, ms){
+    let timer; // сохраняем id таймера
+    return function(...args){ // в обертку rest сохраняет параметры браузера
+        clearTimeout(timer); 
+        timer = setTimeout(() => {
+            fn(...args);
+        }, ms)
+    }
+}
+
+const searchTitle = debounce(getSearchTitle, 600);
+searchNode.addEventListener('input', searchTitle);
+
+async function fetchData(title){
+    try{
+        const request = await fetch(`${searchURL}${encodeURIComponent(title)}`);
+        const response = await request.json();
+        return response; // Промис возвращает
+    }catch(error){
+        console.log(`Ошибка парсинга: ${error}`);
+    }
+}
+async function getSearchTitle(event) {
+    const title = event.target.value;
+    const response = await fetchData(title);
+    console.log(response);
+    
+    renderSearchTitle(response);
+}
+
+async function renderSearchTitle(response) {
+    if(response.Response === 'True'){
+        titleSearchNode.classList.add('popup-open');
+        titleSearchNode.innerHTML = `
+            <div class="header__popup-content">
+                <div class="header__popup-image-wrapper">
+                    <img class="header__popup-image" src="${response.Poster}" alt="${response.Title}">
+                </div>
+                <div class="header__popup-about">
+                    <h3 class="header__popup-title">${response.Title}</h3>
+                    <p class="header__popup-subtitle">${response.Year} ${response.Genre}</p>
+                    <p class="header__popup-about-title">${response.Plot}</p>
+                </div>
+            </div>
+        `
+    }else if((searchNode.value.trim() === '')){
+        titleSearchNode.classList.remove('popup-open');
+        titleSearchNode.innerHTML = '';
+    }else{
+        titleSearchNode.classList.add('popup-open');
+        titleSearchNode.innerHTML = `
+        <div class="header__popup-content">
+            <p class='error-movie'>Movie not found!</p>
+        </div>`
+    }
+}
+
 
 async function getInfo(){
     const params = Object.fromEntries(new URLSearchParams(window.location.search));

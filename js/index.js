@@ -33,6 +33,9 @@ function debounce(fn, ms){
     }
 }
 
+const searchTitle = debounce(getSearchTitle, 600);
+searchNode.addEventListener('input', searchTitle);
+
 async function fetchData(title){
     try{
         const request = await fetch(`${URL}${encodeURIComponent(title)}`);
@@ -45,24 +48,35 @@ async function fetchData(title){
 async function getSearchTitle(event) {
     const title = event.target.value;
     const response = await fetchData(title);
+    
     renderSearchTitle(response);
 }
-const searchTitle = debounce(getSearchTitle, 600);
-searchNode.addEventListener('input', searchTitle);
 
 async function renderSearchTitle(response) {
-    titleSearchNode.innerHTML = `
+    if(response.Response === 'True'){
+        titleSearchNode.classList.add('popup-open');
+        titleSearchNode.innerHTML = `
+            <div class="header__popup-content">
+                <div class="header__popup-image-wrapper">
+                    <img class="header__popup-image" src="${response.Poster}" alt="${response.Title}">
+                </div>
+                <div class="header__popup-about">
+                    <h3 class="header__popup-title">${response.Title}</h3>
+                    <p class="header__popup-subtitle">${response.Year} ${response.Genre}</p>
+                    <p class="header__popup-about-title">${response.Plot}</p>
+                </div>
+            </div>
+        `
+    }else if((searchNode.value.trim() === '')){
+        titleSearchNode.classList.remove('popup-open');
+        titleSearchNode.innerHTML = '';
+    }else{
+        titleSearchNode.classList.add('popup-open');
+        titleSearchNode.innerHTML = `
         <div class="header__popup-content">
-            <div class="header__popup-image-wrapper">
-                <img class="header__popup-image" src="${response.Poster}" alt="${response.Title}">
-            </div>
-            <div class="header__popup-about">
-                <h3 class="header__popup-title">${response.Title}</h3>
-                <p class="header__popup-subtitle">${response.Year} ${response.Genre}</p>
-                <p class="header__popup-about-title">${response.Plot}</p>
-            </div>
-        </div>
-    `
+            <p class='error-movie'>Movie not found!</p>
+        </div>`
+    }
 }
 
 async function parseInfo(url, movies){
