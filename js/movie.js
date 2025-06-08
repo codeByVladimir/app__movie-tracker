@@ -111,7 +111,7 @@ function createContent(data, videoId) {
     descriptionNode.textContent = data.Plot;
     ratingNode.textContent = `IMDB Rating ⭐${data.imdbRating}`;
     trailerNode.innerHTML += `
-    <iframe class="main__trailer" width="100%" height="291px" src="${videoId}" frameborder="0" allowfullscreen></iframe>
+    <iframe class="main__trailer" width="521px" height="291px" src="${videoId}" frameborder="0" allowfullscreen></iframe>
     `
     
 }
