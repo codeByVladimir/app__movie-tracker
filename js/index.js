@@ -33,7 +33,7 @@ function debounce(fn, ms){
     }
 }
 
-const searchTitle = debounce(getSearchTitle, 600);
+const searchTitle = debounce(getSearchTitle, 800);
 searchNode.addEventListener('input', searchTitle);
 
 async function fetchData(title){
@@ -55,30 +55,44 @@ async function getSearchTitle(event) {
 async function renderSearchTitle(response) {
     if(response.Response === 'True'){
         titleSearchNode.classList.add('popup-open');
+        document.body.classList.add('no-scroll');
         titleSearchNode.innerHTML = `
             <div class="header__popup-content">
-                <div class="header__popup-image-wrapper">
-                    <img class="header__popup-image" src="${response.Poster}" alt="${response.Title}">
-                </div>
-                <div class="header__popup-about">
-                    <h3 class="header__popup-title">${response.Title}</h3>
-                    <p class="header__popup-subtitle">${response.Year} ${response.Genre}</p>
-                    <p class="header__popup-about-title">${response.Plot}</p>
-                </div>
+                <a href="movie.html?id=${response.imdbID}" class="header__popup-link">
+                    <div class="header__popup-image-wrapper">
+                        <img class="header__popup-image" src="${response.Poster}" alt="${response.Title}">
+                    </div>
+                    <div class="header__popup-about">
+                        <h3 class="header__popup-title">${response.Title}</h3>
+                        <p class="header__popup-subtitle">${response.Year} ${response.Genre}</p>
+                        <p class="header__popup-about-title">${response.Plot}</p>
+                    </div>
+                </a>
             </div>
         `
+        searchNode.value = '';
     }else if((searchNode.value.trim() === '')){
         titleSearchNode.classList.remove('popup-open');
+        document.body.classList.remove('no-scroll');
         titleSearchNode.innerHTML = '';
     }else{
         titleSearchNode.classList.add('popup-open');
+        document.body.classList.add('no-scroll');
         titleSearchNode.innerHTML = `
         <div class="header__popup-content">
-            <p class='error-movie'>Movie not found!</p>
+            <p class='error-movie'>Movie not found! English please</p>
         </div>`
     }
+    
 }
-
+document.addEventListener('click', (event) => {
+    console.log(event.target.classList[0]);
+    if(event.target.classList[0] === 'header__popup'){
+        titleSearchNode.classList.remove('popup-open');
+        document.body.classList.remove('no-scroll');
+        searchNode.value = '';
+    }
+})
 async function parseInfo(url, movies){
     try{
         const parseData = [];

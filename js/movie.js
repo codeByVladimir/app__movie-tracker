@@ -45,6 +45,7 @@ async function getSearchTitle(event) {
 async function renderSearchTitle(response) {
     if(response.Response === 'True'){
         titleSearchNode.classList.add('popup-open');
+        document.body.classList.add('no-scroll');
         titleSearchNode.innerHTML = `
             <div class="header__popup-content">
                 <div class="header__popup-image-wrapper">
@@ -59,15 +60,26 @@ async function renderSearchTitle(response) {
         `
     }else if((searchNode.value.trim() === '')){
         titleSearchNode.classList.remove('popup-open');
+        document.body.classList.remove('no-scroll');
         titleSearchNode.innerHTML = '';
     }else{
         titleSearchNode.classList.add('popup-open');
+        document.body.classList.add('no-scroll');
         titleSearchNode.innerHTML = `
         <div class="header__popup-content">
-            <p class='error-movie'>Movie not found!</p>
+            <p class='error-movie'>Movie not found! English please</p>
         </div>`
     }
+    
 }
+document.addEventListener('click', (event) => {
+    console.log(event.target.classList[0]);
+    if(event.target.classList[0] === 'header__popup'){
+        titleSearchNode.classList.remove('popup-open');
+        document.body.classList.remove('no-scroll');
+        searchNode.value = '';
+    }
+})
 
 
 async function getInfo(){
@@ -99,7 +111,7 @@ function createContent(data, videoId) {
     descriptionNode.textContent = data.Plot;
     ratingNode.textContent = `IMDB Rating ⭐${data.imdbRating}`;
     trailerNode.innerHTML += `
-    <iframe class="main__trailer" width="521px" height="291px" src="${videoId}" frameborder="0" allowfullscreen></iframe>
+    <iframe class="main__trailer" width="100%" height="291px" src="${videoId}" frameborder="0" allowfullscreen></iframe>
     `
     
 }
